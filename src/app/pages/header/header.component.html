@@ -1,0 +1,90 @@
+<div *ngIf="false"
+    style="background:#DE2E2E;width:100%;color:white;padding-left:60px;padding-right:70px;height:60px;display:flex;align-items:center;justify-content:space-between;">
+
+    <div style="display:flex;align-items:center;;">
+        Tienes un nuevo
+        <h6 style="margin:0;padding-left:5px;padding-right:5px">
+            Cobro Activo
+        </h6>
+        generado por pagos con tarjeta 👌👌 🔥🔥
+
+        <button mat-raised-button style="margin-left:20px">VER COBRO</button>
+
+    </div>
+    <div
+        style="height:30px;width:30px;border-radius:50%;background:white;opacity:0.5;color:#333;border-radius:50%;display:flex;align-items:center;justify-content:center;">
+        <i class="material-icons" style="font-size:18px;">
+            close
+        </i>
+    </div>
+
+</div>
+
+
+<div
+    style="padding-left:30px;padding-right:30px;width:100%;height:70px;background:#686868;display:flex;justify-content:space-between;align-items:center;">
+    <div (click)="openPage('home')" style="display:flex;align-items:center">
+        <img src="assets/logo_2.png" style="width:50px">
+        <div style="margin-left:20px;font-family: 'Montserrat Alternates', sans-serif;color:white">
+            <div style="font-size:28px;font-weight:900;display:flex;">
+                <span style="color:#9EE020">
+                    MOVI
+                </span>
+                <span style="color:white">
+                    APP
+                </span>
+            </div>
+            <div
+                style="width:100%;text-align:center;font-family: 'Montserrat', sans-serif;font-size:10px;font-weight:600">
+                ENVÍA RAPIDO Y SEGURO
+            </div>
+        </div>
+    </div>
+    <div style="display:flex;align-items:center">
+        <div *ngIf="false" (click)="openPage('usuario')" style="display:flex;margin-right:20px;align-items:center;">
+            <i class="far fa-credit-card" style="color:white;margin-right:0px;font-size:20px"></i>
+            <div
+                style="display:flex;align-items:center;justify-content:center;margin-left:5px;width:25px;height:25px;border-radius:50%;color:white;background:red">
+                1
+            </div>
+        </div>
+        <div *ngIf="_auth.usuario.cuentaSet" (click)="openPage('historial')" style="display:flex;margin-right:20px;align-items:center;">
+            <mat-icon style="color:white">fastfood</mat-icon>
+            <div *ngIf="_control.pedidos > 0"
+                style="display:flex;align-items:center;justify-content:center;margin-left:5px;width:25px;height:25px;border-radius:50%;color:white;background:red">
+                {{_control.pedidos}}
+            </div>
+        </div>
+        <button *ngIf="_auth.usuario.cuentaSet"  mat-button [matMenuTriggerFor]="menu">
+            <div style="display:flex;align-items:center">
+                <img src="assets/user.png" style="height:40px;width:40px;border-radius:50%;object-fit:cover">
+                <div style="font-size:18px;color:white;margin-left:10px">
+                    {{_auth.usuario.nombre}}
+                </div>
+                <i class="fas fa-caret-down" style="color:white;margin-left:10px"></i>
+            </div>
+        </button>
+    </div>
+
+</div>
+
+<mat-menu #menu="matMenu">
+    <button (click)="openCodigoPromo()" mat-menu-item>
+        <mat-icon>local_offer</mat-icon>
+        <span style="font-size:16px">
+            Código promo
+        </span>
+    </button>
+    <button mat-menu-item>
+        <mat-icon>settings</mat-icon>
+        <span style="font-size:16px">
+            Configuraciones
+        </span>
+    </button>
+    <mat-divider></mat-divider>
+    <button mat-menu-item>
+        <span style="font-size:16px">
+            Salir
+        </span>
+    </button>
+</mat-menu>

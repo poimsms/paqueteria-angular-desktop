@@ -1,0 +1,54 @@
+<div style="padding:30px">
+    <table class="table table-striped" style="border:1px solid #eee">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Cliente</th>
+                <th scope="col">Descripción</th>
+                <th scope="col">Estatus</th>
+                <th scope="col">Acción</th>
+
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let pedido of pedidos; let i = index">
+                <th scope="row">{{i + 1}}</th>
+                <td> {{pedido.nombre_destino}} </td>
+                <td>
+                    <div *ngIf="pedido.instrucciones">
+                        {{ (pedido.instrucciones.length>35)? (pedido.instrucciones | slice:0:35)+'..':(pedido.instrucciones) }}
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="pedido.activo" style="color:green">
+                        Activo
+                    </div>
+                    <div *ngIf="pedido.entregado">
+                        Completado
+                    </div>
+                    <div *ngIf="pedido.cancelado" style="color:red">
+                        Cancelado
+                    </div>
+                </td>
+                <td>
+                    <!-- <button (click)="openDetalles(pedido)" mat-stroked-button>
+                        DETALLES
+                    </button> -->
+
+                    <button (click)="openDetalles(pedido)" mat-icon-button>
+                        <mat-icon>remove_red_eye</mat-icon>
+                    </button>
+
+                    <button mat-icon-button>
+                        <mat-icon>map</mat-icon>
+                    </button>
+
+                    <button (click)="cancelarPedido(pedido)" mat-icon-button>
+                        <mat-icon>delete_outline</mat-icon>
+                    </button>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+</div>

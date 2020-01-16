@@ -1,0 +1,57 @@
+<div *ngIf="_control.showToast">
+    <div style="z-index:999;position:fixed;bottom:15px;left:15px;width:100%">
+        <div
+            style="width:300px;background:rgba(10, 10, 10, 0.85);color:white;font-size:16px;padding:15px;padding-left:25px;padding-right:20px;border-radius:3px;box-shadow:0 0 10px #33333373">
+            {{_control.toast_message}}
+        </div>
+    </div>
+</div>
+
+
+
+<div *ngIf="_control.isLoading">
+    <div
+        style="z-index:999;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(10, 10, 10, 0.52);display:flex;align-items:center;justify-content:center">
+        <div style="padding:20px;border-radius:20px;padding-bottom:0;padding-top:5px;background:#13131391">
+            <div style="width:100%;display:flex;justify-content:center">
+                <div class="lds-ring">
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                </div>
+            </div>
+            <!-- <mat-spinner></mat-spinner> -->
+
+            <div style="width:100%;text-align:center;font-size:18px;color:white;margin-bottom:10px">
+                Cargando...
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div *ngIf="_control.showAlert">
+    <div
+        style="z-index:999;background:rgba(10, 10, 10, 0.50);position:fixed;top:0;left:0;width:100%;height:100%;display:flex;align-items:center;justify-content:center">
+        <div style="width:80%;padding:20px;border-radius:4px;background:white;">
+            <div style="font-size:23px;color:#222">
+                {{_control.alert_title}}
+            </div>
+            <div style="font-size:18px;color:#444;margin-top:10px">
+                {{_control.alert_message}}
+            </div>
+
+            <div style="margin-top:20px;width:100%;display:flex;justify-content:flex-end">
+                <div *ngIf="showCancelar" (click)="alertButton('cancel')"
+                    style="margin-right:25px;color:dodgerblue;font-weight:500;">
+                    CANCELAR
+                </div>
+                <div (click)="alertButton('ok')" style="color:dodgerblue;font-weight:500;">
+                    OK
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

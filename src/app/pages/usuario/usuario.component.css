@@ -1,0 +1,20 @@
+button, a {
+	cursor: pointer;
+	outline: inherit;
+}
+
+input {
+	-webkit-appearance: none;
+	outline: none;
+	border:0;
+	box-shadow: none;
+	width: 80%;	
+}
+
+#map {
+    height: 88vh;
+}
+
+.scroll::-webkit-scrollbar {
+	display: none;
+  }

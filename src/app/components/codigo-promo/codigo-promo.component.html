@@ -1,0 +1,11 @@
+<h1 mat-dialog-title>Tienes un código?</h1>
+<div mat-dialog-content>
+  <p>Ingresa acá tu código promo</p>
+  <mat-form-field>
+    <input matInput [(ngModel)]="codigo" style="text-transform:uppercase;font-size:20px;">
+  </mat-form-field>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="addCodigo()">APLICAR</button>
+  <!-- <button mat-button [mat-dialog-close]="data.animal" cdkFocusInitial>Ok</button> -->
+</div>

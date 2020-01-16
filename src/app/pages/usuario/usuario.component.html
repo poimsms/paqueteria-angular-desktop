@@ -1,0 +1,579 @@
+<!-- <p>usuario !</p>
+<button mat-button>Click me!</button>
+<button mat-raised-button (click)="openDialog()">Pick one</button> -->
+
+<div
+    style="padding-left:30px;padding-right:30px;width:100%;height:70px;background:#686868;display:flex;justify-content:space-between;align-items:center;">
+    <div style="display:flex;align-items:center">
+        <img src="assets/logo_2.png" style="width:50px">
+        <div style="margin-left:20px;font-family: 'Montserrat Alternates', sans-serif;color:white">
+            <div style="font-size:28px;font-weight:900;display:flex;">
+                <span style="color:#9EE020">
+                    MOVI
+                </span>
+                <span style="color:white">
+                    APP
+                </span>
+            </div>
+            <div
+                style="width:100%;text-align:center;font-family: 'Montserrat', sans-serif;font-size:10px;font-weight:600">
+                ENVÍA RAPIDO Y SEGURO
+            </div>
+        </div>
+    </div>
+    <button mat-button [matMenuTriggerFor]="menu">
+        <div style="display:flex;align-items:center">
+            <img src="assets/user.png" style="height:40px;width:40px;border-radius:50%;object-fit:cover">
+            <div style="font-size:18px;color:white;margin-left:10px">
+                Pizza Hurt
+            </div>
+            <i class="fas fa-caret-down" style="color:white;margin-left:10px"></i>
+        </div>
+    </button>
+</div>
+
+<mat-menu #menu="matMenu">
+    <button mat-menu-item style="width:250px">
+        <mat-icon>fastfood</mat-icon>
+        <span style="font-size:16px">
+            Nuevo pedido
+        </span>
+    </button>
+    <button mat-menu-item style="width:250px">
+        <mat-icon>access_time</mat-icon>
+        <span style="font-size:16px">
+            Mis pedidos
+        </span>
+    </button>
+    <button mat-menu-item>
+        <mat-icon>settings</mat-icon>
+        <span style="font-size:16px">
+            Configuraciones
+        </span>
+    </button>
+    <mat-divider></mat-divider>
+    <button mat-menu-item>
+        <span style="font-size:16px">
+            Salir
+        </span>
+    </button>
+</mat-menu>
+
+
+
+<div style="display:flex;height:100%;">
+    <div
+        style="border-right:1px solid #ccc;height:100%;width:45%;background:whitesmoke;padding:30px;padding-left:45px;padding-right:45px">
+
+        <div *ngIf="false">
+
+            <div style="margin-bottom:25px;display:flex;align-items:center;">
+                <mat-icon>fastfood</mat-icon>
+                <h5 style="margin-top:12px;margin-left:10px">
+                    Nuevo pedido
+                </h5>
+            </div>
+
+            <mat-card
+                style="background:#f9f9f9;padding:7px;padding-left:15px;padding-right:15px;display:flex;align-items:center;justify-content:space-between;">
+                <div style="display:flex;align-items:center;width:100%">
+                    <i class="material-icons" style="color:#555;margin-right:10px">search</i>
+                    <input placeholder="Dirección de entrega" style="color:#333;background:#f9f9f9;" [(ngModel)]="email"
+                        type="email">
+                </div>
+            </mat-card>
+
+            <div style="display:flex;align-items:center;">
+                <div>
+                    Costo de envío
+                </div>
+                <div style="margin-left:10px;font-size:22px;">
+                    $1500
+                </div>
+            </div>
+
+            <div style="margin-top:35px;font-size:13px;font-weight:600">
+                DETALLES DE ENTREGA
+            </div>
+
+            <div style="display:flex;justify-content:space-between;">
+                <mat-form-field appearance="standard" style="width:45%">
+                    <mat-label>Nombre del cliente</mat-label>
+                    <input matInput placeholder="Daniel Fuentes" autocomplete="off">
+                    <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+                </mat-form-field>
+                <mat-form-field appearance="standard" style="width:45%">
+                    <mat-label>Teléfono</mat-label>
+                    <input matInput placeholder="+56 9 32938291" autocomplete="off">
+                    <mat-icon matSuffix>phone_iphone</mat-icon>
+                </mat-form-field>
+            </div>
+
+
+
+
+            <div style="margin-top:35px;font-size:13px;font-weight:600;margin-right:20px;">
+                DETALLES DEL PEDIDO
+            </div>
+
+            <mat-form-field style="width:40%">
+                <mat-label>Precio</mat-label>
+
+                <input [disabled]="isTarjeta" matInput placeholder="4500" type="number" class="example-right-align"
+                    autocomplete="off">
+                <mat-icon matSuffix>attach_money</mat-icon>
+            </mat-form-field>
+
+            <div>
+                <mat-checkbox *ngIf="showCheck" [(ngModel)]="isTarjeta" (click)="toggleTarjeta()">
+                    El cliente cancelo con tarjeta
+                </mat-checkbox>
+            </div>
+
+            <mat-form-field *ngIf="pedido_detalles" appearance="standard" style="width:100%">
+                <mat-label>Descripción</mat-label>
+                <input matInput placeholder="Pizza XL carnivora + bebida 1.5L" autocomplete="off">
+                <mat-icon matSuffix>local_pizza</mat-icon>
+            </mat-form-field>
+
+            <!-- <div style="margin-top:25px;margin-bottom:15px;font-size:13px;font-weight:600">
+                ¿QUIÉN PAGA?
+            </div> -->
+            <!-- <mat-form-field>
+                <mat-select placeholder="Seleccionar">
+                    <mat-option value="option">Pedido pagado</mat-option>
+                    <mat-option value="option">Cliente</mat-option>
+                    <mat-option value="option">Restaurante</mat-option>
+                </mat-select>
+            </mat-form-field> -->
+            <!-- <mat-radio-group aria-label="Select an option" style="width:100%">
+                <mat-radio-button value="1" style="width:100%;margin-bottom:5px;">Pedido pagado</mat-radio-button>
+                <mat-radio-button value="2" style="width:100%;margin-bottom:5px;">Cliente</mat-radio-button>
+                <mat-radio-button value="3" style="width:100%;margin-bottom:5px;">Restuarante</mat-radio-button>
+            </mat-radio-group> -->
+
+            <!-- <mat-form-field [style.fontSize]="16" style="width:400px">
+                <mat-label>Agregar una descripción (Opcional)</mat-label>
+                <textarea matInput cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="2"
+                    cdkAutosizeMaxRows="5"></textarea>
+            </mat-form-field> -->
+
+            <div style="margin-top:30px;display:flex;justify-content:center">
+                <button mat-flat-button color="accent">
+                    SOLICITAR RIDER
+                </button>
+            </div>
+
+        </div>
+
+
+        <div *ngIf="true">
+            <div style="margin-bottom:25px;display:flex;align-items:center;">
+                <mat-icon>access_time</mat-icon>
+                <h5 style="margin-top:12px;margin-left:10px">
+                    Mis pedidos
+                </h5>
+            </div>
+
+
+            <!-- <div style="width:100%;height:20px"></div> -->
+
+            <mat-tab-group *ngIf="false">
+                <mat-tab label="Activos"> Pedidos activos </mat-tab>
+                <mat-tab label="Completados"> Pedidos completados </mat-tab>
+                <mat-tab label="Todo"> Todos los pedidos </mat-tab>
+            </mat-tab-group>
+
+            <div style="width:100%;height:20px"></div>
+
+
+            <mat-accordion>
+                <mat-expansion-panel>
+                    <mat-expansion-panel-header>
+                        <mat-panel-title>
+                            Pizza grande de...
+                        </mat-panel-title>
+                        <mat-panel-description>
+                            <!-- Activo -->
+                            <span style="margin-left:10px">
+                                <!-- 12 DIC. 6:40 PM -->
+                                Pedido Nr. 939210
+                            </span>
+                        </mat-panel-description>
+                    </mat-expansion-panel-header>
+
+                    <!-- <div style="width:100%;display:flex;justify-content:space-between">
+                        <div style="font-size:13px">
+                            ENTREGA
+                        </div>
+                        <div>
+                            12 DIC. 6:40 PM
+                        </div>
+                    </div> -->
+
+                    <!-- <div style="font-size:15px">
+                        Simon bolicar 802 Valdivia
+                    </div> -->
+
+                    <div style="width:100%;display:flex;justify-content:space-between">
+                        <div style="font-size:13px">
+                            <!-- ENTREGA -->
+                        </div>
+                        <div>
+                            <button mat-raised-button>
+                                DETALLES
+                            </button>
+                            <button mat-raised-button>
+                                VER MAPA
+                            </button>
+
+                        </div>
+                    </div>
+
+
+                    <div style="margin-bottom:10px;font-size:13px">
+                        DETALLES
+                    </div>
+
+                    <div style="display:flex;justify-content:space-between;align-items:center;">
+                        <div style="font-size:15px">
+                            Cliente
+                        </div>
+                        <div style="font-size:15px;display:flex;align-items:center;">
+                            Oscar
+                        </div>
+                    </div>
+
+                    <div style="display:flex;justify-content:space-between;align-items:center;">
+                        <div style="font-size:15px">
+                            Télefono
+                        </div>
+                        <div style="font-size:15px;display:flex;align-items:center;">
+                            <!-- <mat-icon style="margin-right:5px">phone</mat-icon> -->
+                            367387479
+                        </div>
+                    </div>
+
+                    <div style="display:flex;justify-content:space-between;align-items:center;">
+                        <div style="font-size:15px">
+                            Dirección
+                        </div>
+                        <div style="font-size:15px;display:flex;align-items:center;">
+                            Simon bolicar 802 Valdivia
+                        </div>
+                    </div>
+
+                    <div style="display:flex;justify-content:space-between;align-items:center;">
+                        <div style="font-size:15px">
+                            Fecha
+                        </div>
+                        <div style="font-size:13px;display:flex;align-items:center;">
+                            12 DIC. 6:40 PM
+                        </div>
+                    </div>
+
+                    <div style="display:flex;justify-content:space-between;align-items:center;">
+                        <div style="font-size:15px">
+                            Método de pago
+                        </div>
+                        <div style="font-size:15px;display:flex;align-items:center;">
+                            Efectivo
+                        </div>
+                    </div>
+
+                    <div style="margin-top:15px;margin-bottom:10px;font-size:13px">
+                        DESCRIPCIÓN
+                    </div>
+                    <div style="font-size:15px">
+                        Es una Piza grande con quedo y bebida
+                    </div>
+
+                    <div style="margin-top:20px;display:flex;align-items:center;justify-content:space-between">
+                        <div style="font-size:15px">
+                            Costo del pedido
+                        </div>
+                        <div style="font-size:15px">
+                            1500
+                        </div>
+                    </div>
+                    <div style="margin-top:5px;display:flex;align-items:center;justify-content:space-between">
+                        <div style="font-size:15px">
+                            Costo de envio
+                        </div>
+                        <div style="font-size:15px">
+                            1500
+                        </div>
+                    </div>
+                    <div
+                        style="padding-top:5px;margin-top:5px;border-top:1px solid #333;display:flex;align-items:center;justify-content:space-between">
+                        <div style="font-size:15px">
+                            TOTAL
+                        </div>
+                        <div style="font-size:20px">
+                            7500
+                        </div>
+                    </div>
+                </mat-expansion-panel>
+                <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+                    <mat-expansion-panel-header>
+                        <mat-panel-title>
+                            Self aware panel
+                        </mat-panel-title>
+                        <mat-panel-description>
+                            Currently I am {{panelOpenState ? 'open' : 'closed'}}
+                        </mat-panel-description>
+                    </mat-expansion-panel-header>
+                    <p>I'm visible because I am open</p>
+                </mat-expansion-panel>
+                <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+                    <mat-expansion-panel-header>
+                        <mat-panel-title>
+                            Self aware panel
+                        </mat-panel-title>
+                        <mat-panel-description>
+                            Currently I am {{panelOpenState ? 'open' : 'closed'}}
+                        </mat-panel-description>
+                    </mat-expansion-panel-header>
+                    <p>I'm visible because I am open</p>
+                </mat-expansion-panel>
+                <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+                    <mat-expansion-panel-header>
+                        <mat-panel-title>
+                            Self aware panel
+                        </mat-panel-title>
+                        <mat-panel-description>
+                            Currently I am {{panelOpenState ? 'open' : 'closed'}}
+                        </mat-panel-description>
+                    </mat-expansion-panel-header>
+                    <p>I'm visible because I am open</p>
+                </mat-expansion-panel>
+                <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+                    <mat-expansion-panel-header>
+                        <mat-panel-title>
+                            Self aware panel
+                        </mat-panel-title>
+                        <mat-panel-description>
+                            Currently I am {{panelOpenState ? 'open' : 'closed'}}
+                        </mat-panel-description>
+                    </mat-expansion-panel-header>
+                    <p>I'm visible because I am open</p>
+                </mat-expansion-panel>
+                <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+                    <mat-expansion-panel-header>
+                        <mat-panel-title>
+                            Self aware panel
+                        </mat-panel-title>
+                        <mat-panel-description>
+                            Currently I am {{panelOpenState ? 'open' : 'closed'}}
+                        </mat-panel-description>
+                    </mat-expansion-panel-header>
+                    <p>I'm visible because I am open</p>
+                </mat-expansion-panel>
+                <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+                    <mat-expansion-panel-header>
+                        <mat-panel-title>
+                            Self aware panel
+                        </mat-panel-title>
+                        <mat-panel-description>
+                            Currently I am {{panelOpenState ? 'open' : 'closed'}}
+                        </mat-panel-description>
+                    </mat-expansion-panel-header>
+                    <p>I'm visible because I am open</p>
+                </mat-expansion-panel>
+            </mat-accordion>
+
+
+            <mat-card *ngIf="false">
+                <mat-card-content>
+                    <div style="width:100%;display:flex;justify-content:space-between">
+                        <div style="font-size:13px">
+                            ENTREGA
+                        </div>
+                        <div>
+                            12 DIC. 6:40 PM
+                        </div>
+                    </div>
+
+                    <div style="font-size:15px">
+                        Simon bolicar 802 Valdivia
+                    </div>
+
+                    <div style="display:flex;justify-content:space-between;align-items:center;">
+                        <div style="font-size:15px">
+                            Oscar Fuentes
+                        </div>
+                        <div style="font-size:15px;display:flex;align-items:center;">
+                            <mat-icon style="margin-right:5px">phone</mat-icon>
+                            367387479
+                        </div>
+                    </div>
+
+                    <div style="margin-top:15px;font-size:13px">
+                        DESCRIPCIÓN
+                    </div>
+                    <div style="font-size:15px">
+                        Es una Piza grande con quedo y bebida
+                    </div>
+
+                    <div style="margin-top:20px;display:flex;align-items:center;justify-content:space-between">
+                        <div style="font-size:15px">
+                            Costo del pedido
+                        </div>
+                        <div style="font-size:15px">
+                            1500
+                        </div>
+                    </div>
+                    <div style="margin-top:5px;display:flex;align-items:center;justify-content:space-between">
+                        <div style="font-size:15px">
+                            Costo de envio
+                        </div>
+                        <div style="font-size:15px">
+                            1500
+                        </div>
+                    </div>
+                    <div
+                        style="margin-top:5px;border-top:1px solid #333;display:flex;align-items:center;justify-content:space-between">
+                        <div style="font-size:15px">
+                            TOTAL
+                        </div>
+                        <div style="font-size:20px">
+                            7500
+                        </div>
+                    </div>
+                </mat-card-content>
+            </mat-card>
+
+
+
+            <mat-card *ngIf="false" style="margin-top: 20px;">
+                <mat-card-content>
+                    <div style="width:100%;display:flex;justify-content:space-between">
+                        <div style="font-size:13px">
+                            ENTREGA
+                        </div>
+                        <div>
+                            12 DIC. 6:40 PM
+                        </div>
+                    </div>
+
+                    <div style="font-size:15px">
+                        Simon bolicar 802 Valdivia
+                    </div>
+
+                    <div style="display:flex;justify-content:space-between;align-items:center;">
+                        <div style="font-size:15px">
+                            Oscar Fuentes
+                        </div>
+                        <div style="font-size:15px;display:flex;align-items:center;">
+                            <mat-icon style="margin-right:5px">phone</mat-icon>
+                            367387479
+                        </div>
+                    </div>
+
+                    <div style="margin-top:15px;font-size:13px">
+                        DESCRIPCIÓN
+                    </div>
+                    <div style="font-size:15px">
+                        Es una Piza grande con quedo y bebida
+                    </div>
+
+                    <div style="margin-top:20px;display:flex;align-items:center;justify-content:space-between">
+                        <div style="font-size:15px">
+                            Costo del pedido
+                        </div>
+                        <div style="font-size:15px">
+                            1500
+                        </div>
+                    </div>
+                    <div style="margin-top:5px;display:flex;align-items:center;justify-content:space-between">
+                        <div style="font-size:15px">
+                            Costo de envio
+                        </div>
+                        <div style="font-size:15px">
+                            1500
+                        </div>
+                    </div>
+                    <div
+                        style="margin-top:5px;border-top:1px solid #333;display:flex;align-items:center;justify-content:space-between">
+                        <div style="font-size:15px">
+                            TOTAL
+                        </div>
+                        <div style="font-size:20px">
+                            7500
+                        </div>
+                    </div>
+                </mat-card-content>
+            </mat-card>
+
+
+
+
+            <mat-card *ngIf="false" style="margin-top: 20px;">
+                <mat-card-content>
+                    <div style="width:100%;display:flex;justify-content:space-between">
+                        <div style="font-size:13px">
+                            ENTREGA
+                        </div>
+                        <div>
+                            12 DIC. 6:40 PM
+                        </div>
+                    </div>
+
+                    <div style="font-size:15px">
+                        Simon bolicar 802 Valdivia
+                    </div>
+
+                    <div style="display:flex;justify-content:space-between;align-items:center;">
+                        <div style="font-size:15px">
+                            Oscar Fuentes
+                        </div>
+                        <div style="font-size:15px;display:flex;align-items:center;">
+                            <mat-icon style="margin-right:5px">phone</mat-icon>
+                            367387479
+                        </div>
+                    </div>
+
+                    <div style="margin-top:15px;font-size:13px">
+                        DESCRIPCIÓN
+                    </div>
+                    <div style="font-size:15px">
+                        Es una Piza grande con quedo y bebida
+                    </div>
+
+                    <div style="margin-top:20px;display:flex;align-items:center;justify-content:space-between">
+                        <div style="font-size:15px">
+                            Costo del pedido
+                        </div>
+                        <div style="font-size:15px">
+                            1500
+                        </div>
+                    </div>
+                    <div style="margin-top:5px;display:flex;align-items:center;justify-content:space-between">
+                        <div style="font-size:15px">
+                            Costo de envio
+                        </div>
+                        <div style="font-size:15px">
+                            1500
+                        </div>
+                    </div>
+                    <div
+                        style="margin-top:5px;border-top:1px solid #333;display:flex;align-items:center;justify-content:space-between">
+                        <div style="font-size:15px">
+                            TOTAL
+                        </div>
+                        <div style="font-size:20px">
+                            7500
+                        </div>
+                    </div>
+                </mat-card-content>
+            </mat-card>
+
+        </div>
+
+
+    </div>
+    <div style="height:100%;width:65%;background:#444">
+        <div id='map'></div>
+
+    </div>
+</div>

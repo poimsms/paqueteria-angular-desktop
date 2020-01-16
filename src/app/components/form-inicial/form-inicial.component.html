@@ -1,0 +1,155 @@
+<div mat-dialog-title>
+    <div *ngIf="step == 1" style="display:flex;justify-content:space-between">
+        Configuración
+        <div style="font-size:18px;">1/3</div>
+    </div>
+    <div *ngIf="step == 2" style="display:flex;justify-content:space-between">
+        Ubicación
+        <div style="font-size:18px;">2/3</div>
+    </div>
+    <div *ngIf="step == 3" style="display:flex;justify-content:space-between">
+        Notificaciones
+        <div style="font-size:18px;">3/3</div>
+    </div>
+
+</div>
+
+<div mat-dialog-content style="overflow:hidden;">
+
+    <div [hidden]="step != 0">
+
+        <div style="display:flex;justify-content:center;">
+            <img src="assets/logo_2.png" style="width:100px">
+        </div>
+
+        <div style="margin-top:10px;margin-bottom:10px;text-align:center">
+            <h6>¡Bienvenido a Moviapp!</h6>
+        </div>
+
+        <div style="font-size:14px;color:#666;margin-top:15px;margin-bottom:35px;text-align:center">
+            Ofrece el servicio de entregas a través de nuestros Riders, rápidos, efectivos y económicos.
+        </div>
+
+        <div style="display:flex;justify-content:center">
+            <div (click)="onNext()"
+                style="background:#20e0a3;color:white;font-size:14px;font-weight:500;padding:5px;padding-left:15px;padding-right:15px;border-radius:5px;text-align:center">
+                Siguiente
+            </div>
+        </div>
+
+    </div>
+
+    <div [hidden]="step != 1">
+        <!-- <p>Por favor completa los siguientes datos:</p>
+        <p>- Una dirección email para enviar comprabantes de pago</p>
+        <p>- Un número para que el Rider se comunique con el local</p> -->
+
+        <!-- <p>Por favor completa lo siguiente:</p> -->
+        <p>
+            <!-- Por favor completa el nombre de tu negocio,
+            una dirección de email para enviar comprabantes de pagos, y un número para que los riders se comuniquen con
+            el local -->
+            <!-- Por favor completa el nombre de tu negocio,
+            una dirección de email dónde enviaremos información de pagos, y un número para que los riders se comuniquen
+            con el local -->
+
+            Para comenzar necesitamos el nombre de tu negocio, y número telefónico para que los riders se puedan
+            comunicar
+            con el local
+        </p>
+
+        <mat-form-field appearance="standard" style="width:100%">
+            <mat-label>Nombre comercial</mat-label>
+            <input [(ngModel)]="nombre" matInput placeholder="Ej. McDonald's" style="text-transform:capitalize" autocomplete="off">
+            <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+        </mat-form-field>
+
+        <!-- <mat-form-field appearance="standard" style="width:100%">
+            <mat-label>Dirección de email</mat-label>
+            <input [(ngModel)]="email" matInput placeholder="Ej. micorreo@gmail.com" autocomplete="off">
+            <mat-icon matSuffix>email_outline</mat-icon>
+        </mat-form-field> -->
+
+        <mat-form-field appearance="standard" style="width:100%">
+            <mat-label>Teléfono</mat-label>
+            <input [(ngModel)]="telefono" matInput placeholder="Teléfono" type="number" class="example-right-align"
+                autocomplete="off">
+            <div matPrefix style="margin-right:10px">+56</div>
+            <mat-icon matSuffix>phone</mat-icon>
+        </mat-form-field>
+
+    </div>
+
+    <div [hidden]="step != 2">
+
+        <p style="margin-bottom:0;">Proporcinanos una dirección para recoger los pedidos</p>
+
+        <mat-form-field appearance="standard" style="width:100%">
+            <mat-label>Dirección de recogida</mat-label>
+            <input [(ngModel)]="origin_address" (ngModelChange)="updateSearchResults()"
+                [ngStyle]="{'color': origenReady ? 'green':'black'}" matInput placeholder="Av. ramón picarte 1092"
+                autocomplete="off">
+            <mat-icon matSuffix>room</mat-icon>
+        </mat-form-field>
+
+        <div [hidden]="origin_items.length == 0" style="background:white;border-top:0px;border-radius:2px">
+            <a *ngFor="let item of origin_items"
+                style="padding:5px;width:100%;display:flex;align-items:flex-start;font-size:14px;">
+                <div (click)="selectSearchResult(item)">
+                    {{ item.description }}
+                </div>
+            </a>
+        </div>
+
+
+        <div style="width:100%;height:15px"></div>
+
+        <div #map id="map2" style="border:1px solid #eee"></div>
+    </div>
+
+    <div [hidden]="step != 3">
+
+        <p style="margin-bottom:0;">
+            ¿Te gustaría recibir una alerta cada vez que el Rider complete un pedido?
+        </p>
+
+        <div style="margin-top:35px;margin-bottom:20px;width:100%;display:flex;justify-content:center;">
+            <button *ngIf="!isNotification" mat-stroked-button color="accent" (click)="grandPermitionNotification()">
+                ACTIVAR NOTIFICACIONES
+            </button>
+
+            <button *ngIf="isNotification" mat-stroked-button color="accent">
+                NOTIFICACIONES ACTIVAS
+                <mat-icon matSuffix>thumb_up_alt</mat-icon>
+            </button>
+
+        </div>
+
+    </div>
+
+    <div *ngIf="error_info_incompleta" style="color:red">
+        Por favor, completa todos los campos
+    </div>
+    <div *ngIf="error_email" style="color:red">
+        Email incorrecto
+    </div>
+    <div *ngIf="error_telefono" style="color:red">
+        Teléfono incorrecto
+    </div>
+</div>
+
+
+<div mat-dialog-actions>
+    <button *ngIf="step > 0" mat-button (click)="onBack()">
+        ATRAS
+    </button>
+
+    <button mat-button (click)="onNext()">
+        <div *ngIf="step == 1 || step == 2">
+            SIGUIENTE
+        </div>
+        <div *ngIf="step == 3">
+            FINALIZAR
+        </div>
+    </button>
+</div>

@@ -1,0 +1,162 @@
+<div style="display:flex;height:100%;">
+    <div
+        style="border-right:1px solid #ccc;height:100%;width:45%;background:whitesmoke;padding:30px;padding-left:45px;padding-right:45px">
+
+
+        <div style="margin-bottom:25px;display:flex;align-items:center;justify-content:space-between">
+
+            <div style="display:flex;align-items:center;">
+                <mat-icon>fastfood</mat-icon>
+                <h5 style="margin-top:12px;margin-left:10px">
+                    Nuevo pedido
+                </h5>
+            </div>
+
+            <button (click)="iniciarPedido()" [disabled]="!(isEntregaValid && destinoReady)" mat-flat-button
+                color="accent">
+                SOLICITAR RIDER
+            </button>
+        </div>
+
+        <mat-card
+            style="background:#f9f9f9;padding:7px;padding-left:15px;padding-right:15px;display:flex;align-items:center;justify-content:space-between;">
+            <div style="display:flex;align-items:center;width:100%">
+                <i class="material-icons" style="color:#555;margin-right:10px">search</i>
+                <input [(ngModel)]="destination_address" (ngModelChange)="updateSearchResults()"
+                    [ngStyle]="{'color': destinoReady ? 'green':'black'}" placeholder="Dirección de entrega"
+                    style="background:#f9f9f9;" type="text">
+            </div>
+        </mat-card>
+
+        <div [hidden]="destination_items.length == 0" style="background:white;border-top:0px;border-radius:2px">
+            <a *ngFor="let item of destination_items"
+                style="padding:5px;width:100%;display:flex;align-items:flex-start;font-size:14px;">
+                <div (click)="selectSearchResult(item)">
+                    {{ item.description }}
+                </div>
+            </a>
+        </div>
+
+        <div *ngIf="destinoReady"
+            style="margin-top:20px;padding:15px;display:flex;align-items:center;justify-content:space-between">
+
+            <div *ngIf="showAuto" (click)="vehiculoToggle('auto')" class="holder" [ngClass]="{'holder-active': isAuto}">
+                <div class="burbuja">
+                    <img src="assets/auto.svg" class="img" [ngClass]="{'img-active': isAuto}">
+                </div>
+                <div style="margin-left:10px">
+                    <div class="title" [ngClass]="{'title-active': isAuto}">
+                        AUTO
+                    </div>
+                    <div style="font-size:14px;color:#777;">
+                        ${{precioAuto_promo}}
+                    </div>
+                    <div style="font-size:13px;color:rgb(204, 144, 144);">
+                        {{tiempoAuto}} min
+                    </div>
+                </div>
+            </div>
+
+            <div *ngIf="showMoto" (click)="vehiculoToggle('moto')" class="holder" [ngClass]="{'holder-active': isMoto}">
+                <div class="burbuja">
+                    <img src="assets/moto.svg" class="img" [ngClass]="{'img-active': isMoto}">
+                </div>
+                <div style="margin-left:10px;color:#333;">
+                    <div class="title" [ngClass]="{'title-active': isMoto}">
+                        MOTO
+                    </div>
+                    <div style="font-size:14px;color:#777">
+                        ${{precioMoto_promo}}
+                    </div>
+                    <div style="font-size:13px;color:#999;">
+                        {{tiempoMoto}} min
+                    </div>
+                </div>
+            </div>
+
+            <div *ngIf="showBici" (click)="vehiculoToggle('bicicleta')" class="holder" [ngClass]="{'holder-active': isBicicleta}">
+                <div class="burbuja">
+                    <img src="assets/bici.svg" class="img" [ngClass]="{'img-active': isBicicleta}">
+                </div>
+                <div style="margin-left:10px">
+                    <div class="title" [ngClass]="{'title-active': isBicicleta}">
+                        BICI
+                    </div>
+                    <div style="font-size:14px;color:#777;">
+                        ${{precioBici_promo}}
+                    </div>
+                    <div style="font-size:13px;color:#999;">
+                        {{tiempoBici}} min
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div *ngIf="false" style="display:flex;align-items:center;">
+            <div>
+                Costo de envío
+            </div>
+            <div *ngIf="precio_promo != 0" style="margin-left:10px;font-size:22px;">
+                ${{precio_promo}}
+            </div>
+            <div *ngIf="precio_promo == 0" style="margin-left:10px;font-size:22px;">
+                Gratis
+            </div>
+        </div>
+
+
+        <div style="display:flex;align-items:center;margin-top:35px;font-size:13px;font-weight:600">
+            DETALLES
+            <mat-icon *ngIf="isEntregaValid" style="margin-left:5px;color:limegreen;font-size:20px">check_circle
+            </mat-icon>
+        </div>
+
+        <div style="display:flex;justify-content:space-between;">
+            <mat-form-field appearance="standard" style="width:45%">
+                <mat-label>Nombre del cliente</mat-label>
+                <input [(ngModel)]="nombre_cliente" (ngModelChange)="validarEntrega()" matInput placeholder="Daniel"
+                    style="text-transform:capitalize" autocomplete="off">
+                <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+            </mat-form-field>
+            <mat-form-field appearance="standard" style="width:45%">
+                <mat-label>Teléfono del cliente</mat-label>
+                <input [(ngModel)]="telefono_cliente" (ngModelChange)="validarEntrega()" matInput
+                    placeholder="936271324" autocomplete="off">
+                <mat-icon matSuffix>phone_iphone</mat-icon>
+            </mat-form-field>
+        </div>
+
+        <div>
+            <mat-checkbox [(ngModel)]="isTarjeta" (ngModelChange)="validarPedido()">
+                El cliente pagó los productos con tarjeta
+            </mat-checkbox>
+        </div>
+        <div>
+            <mat-checkbox *ngIf="isTarjeta" [(ngModel)]="isEnvioPagado">
+                También pagó el envío
+            </mat-checkbox>
+        </div>
+
+
+        <mat-form-field appearance="standard" style="width:100%">
+            <mat-label>Añade una descripción (Opcional)</mat-label>
+            <input [(ngModel)]="descripcion_producto" matInput placeholder="Pizza XL carnivora + bebida 1.5L"
+                autocomplete="off">
+            <mat-icon matSuffix>local_pizza</mat-icon>
+        </mat-form-field>
+
+
+    </div>
+
+    <div style="height:100%;width:65%;background:#444">
+        <div *ngIf="cuponData.ok" style="padding:10px;padding-left:15px;color:white;background:#df1f9f">
+            Se aplicó la promoción
+            <span *ngIf="cuponData.cupon.tipo == 'PORCENTAJE'">{{cuponData.cupon.descuento}}%</span>
+            <span *ngIf="cuponData.cupon.tipo == 'DINERO'">${{cuponData.cupon.descuento}}</span>
+            de descto.
+            Válido por {{cuponData.cupon.proximos_pedidos}} viajes.
+        </div>
+        <div id='map'></div>
+    </div>
+</div>

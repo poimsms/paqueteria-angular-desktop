@@ -1,0 +1,25 @@
+button, a {
+	cursor: pointer;
+	outline: inherit;
+}
+
+.mat-form-field-appearance-legacy {
+    align-self: flex-end;
+
+	
+}
+
+#map2 {
+    height: 200px;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance:textfield;
+}

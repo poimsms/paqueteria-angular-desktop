@@ -1,0 +1,24 @@
+<div *ngIf="isBuscando">
+    <h1 mat-dialog-title>Buscando Rider...</h1>
+    <div class="lds-dual-ring" style="margin-left:100px"></div>
+    <div mat-dialog-content>
+        <p>Localizando conductores cercanos</p>
+    </div>
+    <div mat-dialog-actions style="display:flex;justify-content:flex-end">
+        <button mat-button (click)="onCancelar()">CANCELAR</button>
+    </div>
+</div>
+
+<div *ngIf="isAceptado">
+    <h1 mat-dialog-title>¡Pedido Aceptado!</h1>
+    <div mat-dialog-content>
+        <div style="margin-left:50px">
+            <mat-icon style="color:#333;font-size:50px">fastfood</mat-icon>
+            <mat-icon style="color:limegreen;font-size:40px">check</mat-icon>
+        </div>
+        <p>Un Rider llegará en 5 a 8 min.</p>
+    </div>
+    <div mat-dialog-actions style="display:flex;justify-content:flex-end">
+        <button mat-button (click)="onAceptar()">ACEPTAR</button>
+    </div>
+</div>

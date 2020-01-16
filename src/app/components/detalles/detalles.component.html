@@ -1,0 +1,142 @@
+<!-- <div *ngIf="isAceptado">
+        <h1 mat-dialog-title>¡Pedido Aceptado!</h1>
+        <img src="assets/bag.svg" style="width:65px;margin-bottom:10px;margin-left:100px">
+        <div mat-dialog-content>
+            <p>Un Rider llegará en 5 a 8 min.</p>
+        </div>
+        <div mat-dialog-actions style="display:flex;justify-content:flex-end">
+            <button mat-button (click)="onNoClick()">ACEPTAR</button>
+        </div>
+    </div> -->
+
+
+
+<!-- <div style="width:100%;display:flex;justify-content:space-between">
+                        <div style="font-size:13px">
+                            ENTREGA
+                        </div>
+                        <div>
+                            12 DIC. 6:40 PM
+                        </div>
+                    </div> -->
+
+<!-- <div style="font-size:15px">
+                        Simon bolicar 802 Valdivia
+                    </div> -->
+<!-- <div style="color:#666;text-align:right">
+                            Pedido Nr. 219820
+                        </div> -->
+<!-- <div style="width:100%;display:flex;justify-content:space-between;align-items:center;">
+
+    <div style="font-size:15px;color:limegreen">
+        <div *ngIf="data.activo">
+            ACTIVO
+        </div>
+    </div>
+    <div>
+        <button mat-raised-button style="margin-right:15px">
+            CANCELAR
+        </button>
+        <button mat-button>
+            VER MAPA
+        </button>
+    </div>
+</div> -->
+<h1 mat-dialog-title>DETALLES</h1>
+
+
+<!-- <div style="margin-bottom:0px;font-size:13px">
+    DETALLES
+</div> -->
+
+<div style="display:flex;justify-content:space-between;align-items:center;">
+    <div style="font-size:15px">
+        Cliente
+    </div>
+    <div style="text-transform:capitalize;font-size:15px;display:flex;align-items:center;">
+        {{data.nombre_destino}}
+    </div>
+</div>
+
+<div style="display:flex;justify-content:space-between;align-items:center;">
+    <div style="font-size:15px">
+        Teléfono
+    </div>
+    <div style="font-size:15px;display:flex;align-items:center;">
+        <!-- <mat-icon style="margin-right:5px">phone</mat-icon> -->
+        {{data.telefono_destino}}
+    </div>
+</div>
+
+<div style="display:flex;justify-content:space-between;align-items:center;">
+    <div style="font-size:15px">
+        Dirección
+    </div>
+    <div style="overflow:hidden;height:20px;font-size:15px;text-align:right;width:250px;">
+        {{data.destino.direccion}}
+    </div>
+</div>
+
+<div style="display:flex;justify-content:space-between;align-items:center;">
+    <div style="font-size:15px">
+        Fecha
+    </div>
+    <div style="font-size:13px;display:flex;align-items:center;">
+        12 DIC. 6:40 PM
+    </div>
+</div>
+
+<div style="display:flex;justify-content:space-between;align-items:center;">
+    <div style="font-size:15px">
+        Método de pago
+    </div>
+    <div style="font-size:15px;display:flex;align-items:center;">
+        {{data.metodo_de_pago}}
+    </div>
+</div>
+
+<div style="margin-top:15px;margin-bottom:0px;font-size:13px">
+    DESCRIPCIÓN
+</div>
+<div style="font-size:15px">
+    {{data.descripcion_producto}}
+</div>
+
+<!-- <div style="margin-top:20px;display:flex;align-items:center;justify-content:space-between">
+    <div style="font-size:15px">
+        Productos
+    </div>
+    <div style="flex:1;margin-right:7px;margin-left:7px;height:10px;border-bottom: 1px dashed #bbb">
+        </div>
+    <div style="font-size:15px">
+        ${{data.precio_producto}}
+    </div>
+</div> -->
+<div style="margin-top:5px;display:flex;align-items:center;justify-content:space-between">
+    <div style="font-size:15px">
+        Costo de envío
+    </div>
+    <div style="flex:1;margin-right:7px;margin-left:7px;height:10px;border-bottom: 1px dashed #bbb">
+        </div>
+    <div style="font-size:15px">
+        ${{data.costo}}
+    </div>
+</div>
+<!-- <div
+    style="display:flex;align-items:center;justify-content:space-between">
+    <div style="font-size:15px">
+        TOTAL
+    </div>
+    <div style="flex:1;margin-right:7px;margin-left:7px;height:10px;border-bottom: 0px dashed #bbb">
+        </div>
+    <div style="font-size:20px">
+        ${{data.costo + data.precio_producto}}
+    </div>
+</div> -->
+
+<!-- <div mat-dialog-actions>
+    <button mat-button (click)="onNoClick()">
+        CANCELAR
+    </button>
+    <button mat-button cdkFocusInitial>VER MAPA</button>
+</div> -->

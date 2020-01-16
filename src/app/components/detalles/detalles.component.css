@@ -1,0 +1,4 @@
+button, a {
+	cursor: pointer;
+	outline: inherit;
+}
